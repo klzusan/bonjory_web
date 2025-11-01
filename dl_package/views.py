@@ -42,3 +42,9 @@ def verPost_edit(request, pk):
 def verPost_draft_list(request):
     posts = verPost.objects.filter(published_date__gt=timezone.now()).order_by('-created_date')
     return render(request, 'dl_package/verPost_draft_list.html', {'posts':posts})
+
+def verPost_remove(request, pk):
+    post = get_object_or_404(verPost, pk=pk)
+    if request.method == 'POST':
+        post.delete()
+    return redirect('verPost_list')

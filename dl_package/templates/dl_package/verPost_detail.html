@@ -5,7 +5,14 @@
     <div class="detail-top">
         <h2>v{{ post.ver_num }}</h2>
         {% if user.is_authenticated %}
-            <a class="btn btn-default" href="{% url 'verPost_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        <a class="btn btn-default" href="{% url 'verPost_edit' pk=post.pk %}"><span
+                class="glyphicon glyphicon-pencil"></span></a>
+        <form method="POST" action="{% url 'post_remove' pk=post.pk %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger" name="delete">
+                Delete
+            </button>
+        </form>
         {% endif %}
     </div>
     {% if post.published_date %}
