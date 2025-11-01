@@ -43,3 +43,13 @@
 .post h2 a, .post h2 a:visited {
     color: #000000;
 }
+
+.guide {
+    font-weight: bold;
+}
+
+.detail-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}

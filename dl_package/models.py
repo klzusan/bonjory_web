@@ -5,7 +5,7 @@ from django.utils import timezone
 class verPost(models.Model):
     ver_num = models.FloatField()
     ver_text = models.TextField()
-    published_date = models.DateTimeField()
+    published_date = models.DateTimeField(default=timezone.now)
 
     def publish(self):
         self.published_date = timezone.now()

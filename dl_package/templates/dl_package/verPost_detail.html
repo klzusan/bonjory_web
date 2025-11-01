@@ -1,0 +1,18 @@
+{% extends 'dl_package/base.html' %}
+
+{% block content %}
+<div class="verPost">
+    <div class="detail-top">
+        <h2>v{{ post.ver_num }}</h2>
+        <a class="btn btn-default" href="{% url 'verPost_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+    </div>
+    {% if post.published_date %}
+    <div class="date">
+        公開日時：{{ post.published_date }}
+    </div>
+    {% endif %}
+    <br>
+    <p class="guide">更新内容</p>
+    <p>{{ post.ver_text|linebreaksbr }}</p>
+</div>
+{% endblock %}
