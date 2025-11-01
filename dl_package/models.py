@@ -12,4 +12,4 @@ class verPost(models.Model):
         self.save()
 
     def __str__(self):
-        return f"v{self.ver_num}"
+        return str(self.ver_num)
