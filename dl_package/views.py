@@ -38,3 +38,7 @@ def verPost_edit(request, pk):
     else:
         form = verPostForm(instance=post)
     return render(request, 'dl_package/verPost_edit.html', {'form':form})
+
+def verPost_draft_list(request):
+    posts = verPost.objects.filter(published_date__gt=timezone.now()).order_by('-created_date')
+    return render(request, 'dl_package/verPost_draft_list.html', {'posts':posts})

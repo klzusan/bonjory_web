@@ -12,6 +12,7 @@
     <div class="page-header">
         {% if user.is_authenticated %}
             <a href="{% url 'verPost_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+            <a href="{% url 'verPost_draft_list' %}" class="top-menu">Drafts</span></a>
         {% endif %}
         <h1><a href="/">Bonjory（ロゴ）</a></h1>
     </div>

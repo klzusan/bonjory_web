@@ -4,7 +4,9 @@
 <div class="verPost">
     <div class="detail-top">
         <h2>v{{ post.ver_num }}</h2>
-        <a class="btn btn-default" href="{% url 'verPost_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        {% if user.is_authenticated %}
+            <a class="btn btn-default" href="{% url 'verPost_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+        {% endif %}
     </div>
     {% if post.published_date %}
     <div class="date">
