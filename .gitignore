@@ -5,5 +5,8 @@ __pycache__
 .venv
 db.sqlite3
 /static
+/media/*
 .DS_Store
 devCommands.txt
+
+!/media/.gitkeep
