@@ -3,6 +3,9 @@ from .models import verPost
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import verPostForm
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from django.http import FileResponse, Http404
+import os
 
 # Create your views here.
 def verPost_list(request):
@@ -65,3 +68,21 @@ def verPost_publish(request, pk):
     if request.method == 'POST':
         post.publish()
     return redirect('verPost_detail', pk=pk)
+
+@login_required
+def download_file(request):
+    file_path = os.path.join(settings.MEDIA_ROOT, 'sample1.zip')
+    print(f"file_path: {file_path}")
+
+    if not os.path.exists(file_path):
+        raise Http404("File not found.")
+    
+    try:
+        response = FileResponse(open(file_path, 'rb'))
+
+        file_name = os.path.basename(file_path)
+        response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+        return response
+    
+    except Exception as e:
+        raise Http404(f"Error during file processing: {e}")

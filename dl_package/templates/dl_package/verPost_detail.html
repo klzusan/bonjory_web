@@ -27,5 +27,8 @@
     <br>
     <p class="guide">更新内容</p>
     <p>{{ post.ver_text|linebreaksbr }}</p>
+    <form method="get" action="{% url 'download_file' %}">
+        <button type="submit">ダウンロード</button>
+    </form>
 </div>
 {% endblock %}
