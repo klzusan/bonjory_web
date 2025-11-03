@@ -15,10 +15,14 @@
         </form>
         {% endif %}
     </div>
-    {% if post.published_date %}
+    {% if not is_future_post %}
     <div class="date">
         公開日時：{{ post.published_date }}
     </div>
+    {% else %}
+    <form method="POST" action="{% url 'verPost_publish' pk=post.pk %}" class="post-form">{% csrf_token %}
+        <button type="submit" class="post btn btn-secondary" name="publish">Publish</button>
+    </form>
     {% endif %}
     <br>
     <p class="guide">更新内容</p>
