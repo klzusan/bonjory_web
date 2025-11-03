@@ -1,9 +1,18 @@
 /* green: #7bba0a */
 
 .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     background-color: #7bba0a;
     margin-top: 0;
     padding: 20px 20px 20px 40px;
+}
+
+.page-header small {
+    display: flex;
+    align-items: center;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:active {

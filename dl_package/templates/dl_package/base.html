@@ -10,11 +10,20 @@
 
 <body>
     <div class="page-header">
+        <h1><a href="/">Bonjory（ロゴ）</a></h1>
         {% if user.is_authenticated %}
             <a href="{% url 'verPost_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
             <a href="{% url 'verPost_draft_list' %}" class="top-menu">Drafts</span></a>
+            <small>
+                <p class="top-menu">Hello {{ user.username }} </p>
+                <form id="logout-form" method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <a href="#" id="logout-link">ログアウト</a>
+                </form>
+            </small>
+        {% else %}
+            <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
         {% endif %}
-        <h1><a href="/">Bonjory（ロゴ）</a></h1>
     </div>
     <div class="content container">
         <div class="row">
@@ -24,6 +33,7 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 
 </html>
