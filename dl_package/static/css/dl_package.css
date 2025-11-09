@@ -1,18 +1,13 @@
 /* green: #7bba0a */
 
+/* start of header settings */
 .page-header {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    background-color: #7bba0a;
     margin-top: 0;
-    padding: 20px 20px 20px 40px;
-}
-
-.page-header small {
-    display: flex;
+    margin-bottom: 0;
     align-items: center;
+    background-color: #7bba0a;
+    padding: 20px 20px 20px 20px;
 }
 
 .page-header h1, .page-header h1 a, .page-header h1 a:active {
@@ -21,6 +16,26 @@
     text-decoration: none;
     margin: 0;
 }
+
+.page-header p, .page-header form {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.page-header small {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    margin-top: auto;
+}
+
+.top-menu, .top-menu:hover, .top-menu:visited {
+    display: flex;
+    color: #ffffff;
+}
+
+/* end of header settings */
 
 .content {
     margin-left: 40px;
@@ -38,13 +53,6 @@
     width: 100%;
 }
 
-.top-menu, .top-menu:hover, .top-menu:visited {
-    color: #ffffff;
-    float: right;
-    font-size: 26pt;
-    margin-right: 20px;
-}
-
 .post {
     margin-bottom: 70px;
 }
@@ -55,10 +63,22 @@
 
 .guide {
     font-weight: bold;
+} 
+
+/* start of matsu_fes page's style */
+.matsu_fes {
+    display: flex;
+    padding:0;
+    margin:0;
+    height: 100vh;
+    width: 100vw;
+    /* width: 100vw; */
+    /* justify-content: center;
+    align-items: center; */
 }
 
-.detail-top {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+.matsu_fes h1{
+    margin: 0;
 }
+
+/* end of matsu_fes page's style */

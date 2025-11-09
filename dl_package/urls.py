@@ -10,4 +10,5 @@ urlpatterns = [
     path('post/<int:pk>/remove/', views.verPost_remove, name='post_remove'),
     path('post/<int:pk>/publish/', views.verPost_publish, name='verPost_publish'),
     path('download/', views.download_file, name="download_file"),
+    path('matsu_fes/', views.matsu_fes, name="matsu_fes"),
 ]
