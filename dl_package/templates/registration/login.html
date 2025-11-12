@@ -1,24 +1,14 @@
-{% extends "dl_package/base.html" %}
+{% extends "dl_package/matsu_fes_base.html" %}
+{% load django_bootstrap5 %}
 
 {% block content %}
-    {% if form.errors %}
-        <p>Your username and password didn't match. Please try again.</p>
-    {% endif %}
+    <h2>ログイン</h2>
+
+    {% bootstrap_messages %}
 
     <form method="post" action="{% url 'login' %}">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>{{ form.username.label_tag }}</td>
-                <td>{{ form.username }}</td>
-            </tr>
-            <tr>
-                <td>{{ form.password.label_tag }}</td>
-                <td>{{ form.password }}</td>
-            </tr>
-        </table>
-
-        <input type="submit" value="login" />
-        <input type="hidden" name="next" value="{{ next }}" />
+        {% bootstrap_form form %}
+        {% bootstrap_button "ログイン" button_type="submit" class="btn-primary" %}
     </form>
 {% endblock %}

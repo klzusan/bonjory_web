@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 from django.http import FileResponse, Http404
+from .forms import SignUpForm
+from django.urls import reverse
 import os
 
 # Create your views here.
@@ -107,3 +109,16 @@ def zip_upload(request):
     else:
         form = zipUploadForm()
     return render(request, 'dl_package/zipUpload.html', {'form': form})
+
+def signup(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            return redirect(reverse('login'))
+        
+    else:
+        form = SignUpForm()
+
+    return render(request, 'registration/signup.html', {'form': form})
