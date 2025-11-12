@@ -1,0 +1,15 @@
+{% extends "dl_package/matsu_fes_base.html" %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+
+    <h2>シリアル番号登録ページ</h2>
+
+    {% bootstrap_messages %}
+
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% bootstrap_button "登録" button_type="submit" class="btn-primary" %}
+    </form>
+{% endblock %}

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 from django.http import FileResponse, Http404
-from .forms import SignUpForm
+from .forms import SignUpForm, serialNumberForm
 from django.urls import reverse
 import os
 
@@ -122,3 +122,17 @@ def signup(request):
         form = SignUpForm()
 
     return render(request, 'registration/signup.html', {'form': form})
+
+@login_required
+def add_serial_number(request):
+    profile = request.user.profile
+    if profile.serial_number:
+        return render(request, 'dl_package/serial_number_display.html', {'profile': profile})
+    if request.method == 'POST':
+        form = serialNumberForm(request.POST, instance = profile)
+        if form.is_valid():
+            form.save()
+            return redirect('matsu_fes')
+    else:
+        form = serialNumberForm(instance=profile)
+    return render(request, 'dl_package/add_serial_number.html', {'form': form})

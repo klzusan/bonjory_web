@@ -4,6 +4,7 @@ from django.utils import timezone
 from .validators import validate_is_zip
 import os
 from .storages import OverwriteStorage
+from django.contrib.auth.models import User
 
 class verPost(models.Model):
     ver_num = models.FloatField()
@@ -39,3 +40,19 @@ class zipFile(models.Model):
 
     def __str__(self):
         return self.description or str(self.upload)
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    serial_number = models.CharField(max_length=8, blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username
+    
+class serialNumber(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    serial_number = models.CharField(max_length=8, unique=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username} - {self.serial_number}"

@@ -12,4 +12,5 @@ urlpatterns = [
     path('post/<int:pk>/publish/', views.verPost_publish, name='verPost_publish'),
     path('download/', views.download_file, name="download_file"),
     path('upload/', views.zip_upload, name="zip_upload"),
+    path('add_serial/', views.add_serial_number, name='add_serial_number'),
 ]

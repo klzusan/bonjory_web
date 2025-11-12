@@ -22,6 +22,7 @@
             </small>
         {% elif user.is_authenticated %}
             <small>
+                <a href="{% url 'add_serial_number' %}" class="top-menu">シリアル番号登録</a>
                 <p class="top-menu">(</p>
                 <p class="top-menu">LOGGED IN AS: {{ user.username }} </p>
                 <form class="top-menu" id="logout-form" method="POST" action="{% url 'logout' %}">
