@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 from .validators import validate_is_zip
 import os
+from .storages import OverwriteStorage
 
 class verPost(models.Model):
     ver_num = models.FloatField()
@@ -23,7 +24,6 @@ def zip_upload_path(instance, filename):
     
     # ファイル名をUUIDで強制的に変更
     new_filename = f"Handlime{ext}"
-    print(new_filename)
     
     # 保存先パス（'games/' フォルダ内）
     return os.path.join('games', new_filename)
@@ -33,6 +33,7 @@ class zipFile(models.Model):
     upload = models.FileField(
         upload_to=zip_upload_path,
         validators=[validate_is_zip],
+        storage=OverwriteStorage()
         )
     upload_at = models.DateTimeField(auto_now_add=True)
 
