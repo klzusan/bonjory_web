@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import verPost
+from .models import verPost, zipFile
 
 class verPostForm(forms.ModelForm):
 
@@ -15,3 +15,8 @@ class verPostForm(forms.ModelForm):
                 }
             ),
         }
+
+class zipUploadForm(forms.ModelForm):
+    class Meta:
+        model = zipFile
+        fields = ('description', 'upload',)

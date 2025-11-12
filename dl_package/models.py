@@ -1,6 +1,8 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
+from .validators import validate_is_zip
+import os
 
 class verPost(models.Model):
     ver_num = models.FloatField()
@@ -14,3 +16,25 @@ class verPost(models.Model):
 
     def __str__(self):
         return str(self.ver_num)
+    
+def zip_upload_path(instance, filename):
+    # 拡張子を保持する
+    ext = os.path.splitext(filename)[1]  # 例: ".zip"
+    
+    # ファイル名をUUIDで強制的に変更
+    new_filename = f"Handlime{ext}"
+    print(new_filename)
+    
+    # 保存先パス（'games/' フォルダ内）
+    return os.path.join('games', new_filename)
+
+class zipFile(models.Model):
+    description = models.CharField(max_length = 255, blank=True)
+    upload = models.FileField(
+        upload_to=zip_upload_path,
+        validators=[validate_is_zip],
+        )
+    upload_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.description or str(self.upload)

@@ -1,8 +1,9 @@
 from django.utils import timezone
 from .models import verPost
 from django.shortcuts import render, get_object_or_404, redirect
-from .forms import verPostForm
+from .forms import verPostForm, zipUploadForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 from django.http import FileResponse, Http404
 import os
@@ -31,7 +32,7 @@ def verPost_detail(request, pk):
     }
     return render(request, 'dl_package/verPost_detail.html', context)
 
-@login_required
+@staff_member_required
 def verPost_new(request):
     if request.method == "POST":
         form = verPostForm(request.POST)
@@ -44,7 +45,7 @@ def verPost_new(request):
         form = verPostForm()
     return render(request, 'dl_package/verPost_edit.html', {'form':form})
 
-@login_required
+@staff_member_required
 def verPost_edit(request, pk):
     post = get_object_or_404(verPost, pk=pk)
     if request.method == 'POST':
@@ -63,14 +64,14 @@ def verPost_draft_list(request):
     posts = verPost.objects.filter(published_date__gt=timezone.now()).order_by('-created_date')
     return render(request, 'dl_package/verPost_draft_list.html', {'posts':posts})
 
-@login_required
+@staff_member_required
 def verPost_remove(request, pk):
     post = get_object_or_404(verPost, pk=pk)
     if request.method == 'POST':
         post.delete()
     return redirect('verPost_list')
 
-@login_required
+@staff_member_required
 def verPost_publish(request, pk):
     post = get_object_or_404(verPost, pk=pk)
     if request.method == 'POST':
@@ -79,7 +80,7 @@ def verPost_publish(request, pk):
 
 @login_required
 def download_file(request):
-    file_path = os.path.join(settings.MEDIA_ROOT, 'sample1.zip')
+    file_path = os.path.join(settings.MEDIA_ROOT, 'games', 'Handlime_buildtest2.zip')
     print(f"file_path: {file_path}")
 
     if not os.path.exists(file_path):
@@ -94,3 +95,15 @@ def download_file(request):
     
     except Exception as e:
         raise Http404(f"Error during file processing: {e}")
+    
+@staff_member_required
+def zip_upload(request):
+    if request.method == 'POST':
+        form = zipUploadForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('matsu_fes')
+    else:
+        form = zipUploadForm()
+    return render(request, 'dl_package/zipUpload.html', {'form': form})
