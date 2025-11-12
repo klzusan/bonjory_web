@@ -8,39 +8,42 @@
 </head>
 
 <body>
-    <div class="page-header">
-        <h1><a href="/">Bonjory（ロゴ）</a></h1>
-
+    <div class="matsu-page-header">
         {% if user.is_staff %}
             <small>
-                <a href="{% url 'verPost_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
-                <a href="{% url 'verPost_draft_list' %}" class="top-menu">Drafts</span></a>
+                <a href="{% url 'zip_upload' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
                 <p class="top-menu">(</p>
-                <p class="top-menu">Hello {{ user.username }} </p>
+                <p class="top-menu">Staff: {{ user.username }} </p>
                 <form class="top-menu" id="logout-form" method="POST" action="{% url 'logout' %}">
                     {% csrf_token %}
-                    <a href="#" id="logout-link">ログアウト</a>
+                    <a href="#" id="logout-link">LOGOUT</a>
+                </form>
+                <p class="top-menu">)</p>
+            </small>
+        {% elif user.is_authenticated %}
+            <small>
+                <p class="top-menu">(</p>
+                <p class="top-menu">LOGGED IN AS: {{ user.username }} </p>
+                <form class="top-menu" id="logout-form" method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <a href="#" id="logout-link">LOGOUT</a>
                 </form>
                 <p class="top-menu">)</p>
             </small>
         {% else %}
-            <a href="{% url 'login' %}" class="top-menu"><span class="glyphicon glyphicon-lock"></span></a>
+            <small>
+                <a href="{% url 'login' %}" class="top-menu">LOGIN</span></a>
+            </small>
         {% endif %}
     </div>
-    {% if matsu_fes_page %}
-        <div class="matsu_fes container">
-            <div class="row">
-                <div class="col-md-12">
-    {% else %}
-        <div class="content container">
-            <div class="row">
-                <div class="col-md-8">
-    {% endif %}
-                    {% block content %}
-                    {% endblock %}
-                </div>
+    <div class="matsu_fes container">
+        <div class="row">
+            <div class="col-md-12">
+                {% block content %}
+                {% endblock %}
             </div>
         </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script src="{% static 'dl_package/js/scripts.js' %}"></script>
 </body>
