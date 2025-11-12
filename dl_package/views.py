@@ -82,7 +82,7 @@ def verPost_publish(request, pk):
 
 @login_required
 def download_file(request):
-    file_path = os.path.join(settings.MEDIA_ROOT, 'games', 'Handlime_buildtest2.zip')
+    file_path = os.path.join(settings.MEDIA_ROOT, 'games', 'Handlime.zip')
     print(f"file_path: {file_path}")
 
     if not os.path.exists(file_path):
