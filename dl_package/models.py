@@ -43,7 +43,6 @@ class zipFile(models.Model):
     
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    serial_number = models.CharField(max_length=8, blank=True, null=True)
 
     def __str__(self):
         return self.user.username
@@ -55,4 +54,5 @@ class serialNumber(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.user.username} - {self.serial_number}"
+        username = self.user.username if self.user else "未登録"
+        return f"{username} - {self.serial_number}"

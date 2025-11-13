@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import verPost, zipFile, Profile
+from .models import verPost, zipFile, Profile, serialNumber
 
 class verPostForm(forms.ModelForm):
 
@@ -27,7 +27,7 @@ class SignUpForm(UserCreationForm):
 
 class serialNumberForm(forms.ModelForm):
     class Meta:
-        model = Profile
+        model = serialNumber
         fields = ['serial_number']
 
     def clean_serial_number(self):

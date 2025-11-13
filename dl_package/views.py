@@ -1,5 +1,5 @@
 from django.utils import timezone
-from .models import verPost
+from .models import verPost, serialNumber
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import verPostForm, zipUploadForm
 from django.contrib.auth.decorators import login_required
@@ -125,14 +125,22 @@ def signup(request):
 
 @login_required
 def add_serial_number(request):
-    profile = request.user.profile
-    if profile.serial_number:
-        return render(request, 'dl_package/serial_number_display.html', {'profile': profile})
+    serial_obj = serialNumber.objects.filter(user=request.user.first())
+    if serial_obj:
+        return render(request, 'dl_package/serial_number_display.html', {'serial': serial_obj.serial_number})
+    
     if request.method == 'POST':
-        form = serialNumberForm(request.POST, instance = profile)
+        form = serialNumberForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('matsu_fes')
+            serial_input = form.cleaned_data['serial_number']
+            serial_obj = serialNumber.objects.filter(serial_number=serial_input, user__isnull=True).first()
+            if serial_obj:
+                serial_obj.user = request.user
+                serial_obj.save()
+                return redirect('matsu_fes')
+            else:
+                form.add_error('serial_number', 'このシリアル番号は存在しないか，既に使用されています．')
     else:
-        form = serialNumberForm(instance=profile)
+        form = serialNumberForm()
+
     return render(request, 'dl_package/add_serial_number.html', {'form': form})
