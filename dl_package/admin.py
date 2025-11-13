@@ -6,11 +6,11 @@ admin.site.register(verPost)
 
 @admin.register(serialNumber)
 class serialNumberAdmin(admin.ModelAdmin):
-    list_display = ('serial_number', 'get_user', 'created_at')
+    list_display = ('serial_number', 'get_user_email', 'created_at')
 
-    def get_user(self, obj):
-        return obj.user.username if obj.user else '未登録'
-    get_user.short_description = 'User'
+    def get_user_email(self, obj):
+        return obj.user.email if obj.user else '未登録'
+    get_user_email.short_description = 'Email'
 
 @admin.register(zipFile)
 class zipFileAdmin(admin.ModelAdmin):

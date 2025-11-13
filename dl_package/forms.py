@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import verPost, zipFile, Profile, serialNumber
+from .models import verPost, zipFile, serialNumber, CustomUser
 
 class verPostForm(forms.ModelForm):
 
@@ -23,7 +23,13 @@ class zipUploadForm(forms.ModelForm):
 
 class SignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
-        fields = ('username','email')
+        model = CustomUser
+        fields = ('email',) + UserCreationForm.Meta.fields[1:]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if 'username' in self.fields:
+            del self.fields['username']
 
 class serialNumberForm(forms.Form):
     serial_number = forms.CharField(

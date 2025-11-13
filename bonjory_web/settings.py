@@ -129,3 +129,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 LOGIN_REDIRECT_URL = '/'
+
+AUTH_USER_MODEL = 'dl_package.CustomUser'
