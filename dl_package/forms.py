@@ -25,13 +25,16 @@ class SignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         fields = ('username','email')
 
-class serialNumberForm(forms.ModelForm):
-    class Meta:
-        model = serialNumber
-        fields = ['serial_number']
+class serialNumberForm(forms.Form):
+    serial_number = forms.CharField(
+        max_length=8,
+        label='シリアル番号',
+        widget=forms.TextInput(attrs={'placeholder': '8桁のシリアル番号を入力'})
+    )
 
     def clean_serial_number(self):
         serial = self.cleaned_data.get('serial_number')
+
         if not serial.isdigit() or len(serial) != 8:
-            raise forms.ValidationError('8桁のシリアル番号を入力してください')
+            raise forms.ValidationError('8桁の数字を入力してください')
         return serial

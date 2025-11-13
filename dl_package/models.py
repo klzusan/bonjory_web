@@ -48,11 +48,10 @@ class Profile(models.Model):
         return self.user.username
     
 class serialNumber(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     serial_number = models.CharField(max_length=8, unique=True)
-
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        username = self.user.username if self.user else "未登録"
+        username = self.user.username if self.user else '未登録'
         return f"{username} - {self.serial_number}"

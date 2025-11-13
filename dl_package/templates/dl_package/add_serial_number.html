@@ -3,7 +3,13 @@
 
 {% block content %}
 
-    <h2>シリアル番号登録ページ</h2>
+    {% if form.errors %}
+        <div class="red">
+            {{ form.errors }}
+        </div>
+    {% else %}
+        <h2>シリアル番号登録ページ</h2>
+    {% endif %}
 
     {% bootstrap_messages %}
 

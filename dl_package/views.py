@@ -125,7 +125,7 @@ def signup(request):
 
 @login_required
 def add_serial_number(request):
-    serial_obj = serialNumber.objects.filter(user=request.user.first())
+    serial_obj = serialNumber.objects.filter(user=request.user).first()
     if serial_obj:
         return render(request, 'dl_package/serial_number_display.html', {'serial': serial_obj.serial_number})
     
@@ -133,13 +133,16 @@ def add_serial_number(request):
         form = serialNumberForm(request.POST)
         if form.is_valid():
             serial_input = form.cleaned_data['serial_number']
-            serial_obj = serialNumber.objects.filter(serial_number=serial_input, user__isnull=True).first()
-            if serial_obj:
-                serial_obj.user = request.user
-                serial_obj.save()
-                return redirect('matsu_fes')
+            serial_record = serialNumber.objects.filter(serial_number=serial_input).first()
+
+            if serial_record is None:
+                form.add_error('serial_number', 'このシリアル番号は存在しません．')
+            elif serial_record.user is not None:
+                form.add_error('serial_number', 'このシリアル番号は既に使用されています．')
             else:
-                form.add_error('serial_number', 'このシリアル番号は存在しないか，既に使用されています．')
+                serial_record.user = request.user
+                serial_record.save()
+                return redirect('matsu_fes')
     else:
         form = serialNumberForm()
 
