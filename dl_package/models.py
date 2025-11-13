@@ -87,5 +87,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    class Meta: # 👈 Meta クラスを追加 (または既存のものに追記)
+        # Adminで表示される単数形の名前
+        verbose_name = 'User' 
+        # Adminで表示される複数形の名前（Adminのリスト表示や選択画面のタイトルに使われます）
+        verbose_name_plural = 'Users'
+
     def __str__(self):
         return self.email
