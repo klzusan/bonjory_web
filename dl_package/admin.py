@@ -11,3 +11,6 @@ class serialNumberAdmin(admin.ModelAdmin):
     def get_user(self, obj):
         return obj.user.username if obj.user else '未登録'
     get_user.short_description = 'User'
+
+class zipFileAdmin(admin.ModelAdmin):
+    list_display = ('upload', 'upload_at')

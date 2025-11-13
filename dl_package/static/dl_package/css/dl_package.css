@@ -81,7 +81,7 @@
     padding-right: 20px;
 }
 
-.matsu-page-header p, .matsu-page-header form {
+.matsu-page-header p, .matsu-page-header form, .matsu-page-header a {
     margin-top: 0;
     margin-bottom: 0;
 }

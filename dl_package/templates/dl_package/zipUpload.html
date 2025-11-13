@@ -1,14 +1,23 @@
-{% extends 'dl_package/base.html' %}
+{% extends 'dl_package/matsu_fes_base.html' %}
+{% load django_bootstrap5 %}
 
 {% load static %}
 
 {% block content %}
-    <h1>ゲームファイルアップロードページ</h1>
+    {% if form.errors %}
+        <div class="red">
+            {{ form.errors }}
+        </div>
+    {% else %}
+        <h2>ゲームファイルアップロードページ（.zip）</h2>
+    {% endif %}
+
+    {% bootstrap_messages %}
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">アップロード</button>
+        {% bootstrap_form form %}
+        {% bootstrap_button "登録" button_type="submit" class="btn-primary" %}
     </form>
 {% endblock %}
 

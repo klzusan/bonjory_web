@@ -19,7 +19,7 @@ class verPostForm(forms.ModelForm):
 class zipUploadForm(forms.ModelForm):
     class Meta:
         model = zipFile
-        fields = ('description', 'upload',)
+        fields = ('upload',)
 
 class SignUpForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):

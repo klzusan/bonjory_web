@@ -9,9 +9,9 @@
 
 <body>
     <div class="matsu-page-header">
-        {% if user.is_staff %}
+        {% if user.is_staff or user.is_superuser %}
             <small>
-                <a href="{% url 'zip_upload' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
+                <a href="{% url 'zip_upload' %}" class="top-menu">ゲームアップロード</a>
                 <p class="top-menu">(</p>
                 <p class="top-menu">Staff: {{ user.username }} </p>
                 <form class="top-menu" id="logout-form" method="POST" action="{% url 'logout' %}">
