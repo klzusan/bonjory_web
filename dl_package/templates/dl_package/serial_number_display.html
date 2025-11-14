@@ -15,10 +15,17 @@
     </div>
     
     <br>
-    <div class="row">
-        <form method="get" action="{% url 'download_file' %}">
-            <button type="submit" class="btn btn-primary btn-lg">Handlimeをダウンロード</button>
-        </form>
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <form method="get" action="{% url 'download_file' %}">
+                <button type="submit" name="file" value="win" class="btn btn-primary btn-lg">Windows版</button>
+            </form>
+        </div>
+        <div class="col-auto">
+            <form method="get" action="{% url 'download_file' %}">
+                <button type="submit" name="file" value="mac" class="btn btn-primary btn-lg">Mac版</button>
+            </form>
+        </div>
     </div>
     <br>
     <br>

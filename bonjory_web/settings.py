@@ -18,6 +18,10 @@ from django.core.management.utils import get_random_secret_key
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
+GOOGLE_SERVICE_ACCOUNT_FILE = os.path.join(BASE_DIR, os.getenv('DRIVE_JSON'))
+TARGET_FILE_ID_WIN = os.getenv('TARGET_FILE_ID_WIN')
+TARGET_FILE_ID_MAC = os.getenv('TARGET_FILE_ID_MAC')
+
 
 
 # Quick-start development settings - unsuitable for production

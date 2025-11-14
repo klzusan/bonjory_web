@@ -10,6 +10,9 @@ from .forms import SignUpForm, serialNumberForm, ContactForm
 from django.urls import reverse
 from django.core.mail import send_mail
 import os
+from google.oauth2 import service_account
+from googleapiclient.discovery import build
+from django.http import HttpResponseForbidden, HttpResponseServerError, HttpResponseBadRequest
 
 # Create your views here.
 def matsu_fes(request):
@@ -82,22 +85,61 @@ def verPost_publish(request, pk):
     return redirect('verPost_detail', pk=pk)
 
 @login_required
+# def download_file(request):
+#     file_path = os.path.join(settings.MEDIA_ROOT, 'games', 'Handlime.zip')
+#     print(f"file_path: {file_path}")
+
+#     if not os.path.exists(file_path):
+#         raise Http404("File not found.")
+    
+#     try:
+#         response = FileResponse(open(file_path, 'rb'))
+
+#         file_name = os.path.basename(file_path)
+#         response['Content-Disposition'] = f'attachment; filename="{file_name}"'
+#         return response
+    
+#     except Exception as e:
+#         raise Http404(f"Error during file processing: {e}")
+
+@login_required
 def download_file(request):
-    file_path = os.path.join(settings.MEDIA_ROOT, 'games', 'Handlime.zip')
-    print(f"file_path: {file_path}")
+    # ---- ① シリアル権限チェック ----
+    serial_obj = check_serial_download_permission(request)
+    if serial_obj is None:
+        return HttpResponseForbidden("シリアル番号が登録されていないためダウンロードできません。")
 
-    if not os.path.exists(file_path):
-        raise Http404("File not found.")
-    
+    # ---- ② どちらのファイルをダウンロードするか判定 ----
+    file_type = request.GET.get('file')   # "win" または "mac"
+
+    if file_type == 'win':
+        file_id = settings.TARGET_FILE_ID_WIN
+    elif file_type == 'mac':
+        file_id = settings.TARGET_FILE_ID_MAC
+    else:
+        return HttpResponseBadRequest('不正なファイルタイプです。')
+
+    # ---- ③ Google Drive API サービスを取得 ----
     try:
-        response = FileResponse(open(file_path, 'rb'))
-
-        file_name = os.path.basename(file_path)
-        response['Content-Disposition'] = f'attachment; filename="{file_name}"'
-        return response
-    
+        service = get_drive_service()
     except Exception as e:
-        raise Http404(f"Error during file processing: {e}")
+        return HttpResponseServerError(f"Drive API 初期化エラー: {e}")
+
+    # ---- ④ webContentLink を取得 ----
+    try:
+        drive_file = service.files().get(
+            fileId=file_id,
+            fields="name, webContentLink"
+        ).execute()
+    except Exception as e:
+        return HttpResponseServerError(f"Drive API エラー: {e}")
+
+    download_url = drive_file.get("webContentLink")
+    if not download_url:
+        return HttpResponseServerError("webContentLink が取得できません。共有設定を確認してください。")
+
+    # ---- ⑤ Google Drive のダウンロードURLへリダイレクト ----
+    return redirect(download_url)
     
 @staff_member_required
 def zip_upload(request):
@@ -184,3 +226,32 @@ def contact_view(request):
 
 def contact_thanks_view(request):
     return render(request, 'dl_package/contact_thanks.html')
+
+
+# 以下Gemini生成そのまま貼り付け
+def get_drive_service():
+    SERVICE_ACCOUNT_FILE = settings.GOOGLE_SERVICE_ACCOUNT_FILE
+    SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
+
+    creds = service_account.Credentials.from_service_account_file(
+    SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    service = build('drive', 'v3', credentials=creds)
+    return service
+
+def check_serial_download_permission(request):
+    """
+    ログインユーザーが有効かつ未使用でないシリアル番号を持っているかチェックする。
+    有効なシリアル番号オブジェクト（serialNumberモデルのインスタンス）を返す。
+    権限がない場合は None を返す。
+    """
+    if not request.user.is_authenticated:
+        return None # ログインしていない
+    
+    # ユーザーに紐づけられているシリアル番号レコードを取得
+    serial_obj = serialNumber.objects.filter(user=request.user).first()
+    
+    if serial_obj:
+        # ここでは、紐づけられている＝有効と判断する
+        return serial_obj
+    else:
+        return None

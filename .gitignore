@@ -175,6 +175,8 @@ cython_debug/
 
 bonjory_web/local_settings.py #追加
 
+client_secret_*.json
+imposing*.json
 devCommands.txt
 .DS_Store
 /.vscode
