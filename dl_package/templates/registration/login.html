@@ -7,11 +7,10 @@
     </div>
     
     <div class="row">
-        {% bootstrap_messages %}
-
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
             {% bootstrap_form form %}
+            {% bootstrap_messages %}
             {% bootstrap_button "ログイン" button_type="submit" class="btn-primary" %}
         </form>
     </div>

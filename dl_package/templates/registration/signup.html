@@ -3,19 +3,18 @@
 
 {% block content %}
     <div class="row">
-    {% if form.errors %}
-        <div class="red">
-            {{ form.errors }}
-        </div>
-    {% else %}
         <h2>サインアップ</h2>
-    {% endif %}
     </div>
     <div class="row mt-3">
-        {% bootstrap_messages %}
         <form method="post" action="{% url 'signup' %}">
             {% csrf_token %}
             {% bootstrap_form form %}
+            {% bootstrap_messages %}
+            {% if form.errors %}
+                <div>
+                    {{ form.errors }}
+                </div>
+            {% endif %}
             {% bootstrap_button "送信" button_type="submit" class="btn-primary" %}
         </form>
     </div>

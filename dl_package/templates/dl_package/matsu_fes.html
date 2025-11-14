@@ -3,18 +3,21 @@
 {% load static %}
 
 {% block content %}
-    <div class="video-wrap">
-        <video autoplay muted loop id="bg-video">
-            <source src="{% static 'dl_package/mov/movie.mp4' %}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
     <div class="row">
         <img src="{% static 'dl_package/img/logo.png' %}" class="mx-auto d-block" alt="ロゴ">
     </div>
     <div class="row">
         <h1 style="color:white;">その手で，世界を歩こう．</h1>
         <p style="color:white;"><br>BONJORYが贈る，「手だけで遊べる」新感覚パズルアクションゲーム．</h3>
+    </div>
+    <div class="row">
+        <p style="color:white;">松ヶ崎祭では<span style="color: orange;">0611教室</span>でデモをやっています！<br>ぜひ来てください！</h3>
+    </div>
+    <div class="video-wrap">
+        <video autoplay muted loop id="bg-video">
+            <source src="{% static 'dl_package/mov/movie.mp4' %}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
     </div>
 {% endblock %}
 
