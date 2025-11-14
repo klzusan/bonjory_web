@@ -9,40 +9,74 @@
 </head>
 
 <body>
-    <div class="matsu-page-header">
-        <a href="/">
-            <img src="{% static 'dl_package/img/bonjory_logo.png' %}" alt="bonjory logo" class="img-fluid header-image-cover">
-        </a>
-        {% if user.is_staff or user.is_superuser %}
-            <small>
-                <a href="{% url 'zip_upload' %}" class="top-menu">ゲームアップロード</a>
-                <p class="top-menu">(</p>
-                <p class="top-menu">Staff: {{ user.email }} </p>
-                <form class="top-menu" id="logout-form" method="POST" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <a href="#" id="logout-link">ログアウト</a>
-                </form>
-                <p class="top-menu">)</p>
-            </small>
-        {% elif user.is_authenticated %}
-            <small>
-                <a href="{% url 'add_serial_number' %}" class="top-menu">シリアル番号登録 & ダウンロード</a>
-                <a href="{% url 'contact' %}" class="top-menu">お問い合わせ</a>
-                <p class="top-menu">(</p>
-                <p class="top-menu">ログイン中: {{ user.email }} </p>
-                <form class="top-menu" id="logout-form" method="POST" action="{% url 'logout' %}">
-                    {% csrf_token %}
-                    <a href="#" id="logout-link">ログアウト</a>
-                </form>
-                <p class="top-menu">)</p>
-            </small>
-        {% else %}
-            <small>
-                <a href="{% url 'login' %}" class="top-menu">LOGIN</span></a>
-                <a href="{% url 'signup' %}" class="top-menu">サインアップ</span></a>
-            </small>
-        {% endif %}
-    </div>
+    <nav class="fixed-top custom-navbar-color navbar-dark">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="/">
+                <img src="{% static 'dl_package/img/bonjory_logo.png' %}" alt="bonjory logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" data-bs-theme="dark">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Handlime</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/">ホーム</a>
+                        </li>
+                        <br>
+                        {% if user.is_staff or user.is_superuser %}
+                        <li class="nav-item">
+                            <a href="{% url 'zip_upload' %}" class="nav-link active">ゲームアップロード</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <form class="" id="logout-form" method="POST" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <br><br>
+                                <a class="nav-link active" href="#" id="logout-link">ログアウト</a>
+                            </form>
+                        </li>
+                        <small>
+                            <p>スタッフ: {{ user.email }}</p>
+                        </small>
+                        {% elif user.is_authenticated %}
+                        <li class="nav-item">
+                            <a href="{% url 'add_serial_number' %}" class="nav-link active">シリアル番号登録 & ゲームダウンロード</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a href="{% url 'contact' %}" class="nav-link active">お問い合わせ</a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <form class="" id="logout-form" method="POST" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <br><br>
+                                <a class="nav-link active" href="#" id="logout-link">ログアウト</a>
+                            </form>
+                        </li>
+                        <small>
+                            <p>ログイン中: {{ user.email }}</p>
+                        </small>
+                        {% else %}
+                        <li class="nav-item">
+                            <a href="{% url 'login' %}" class="nav-link active">ログイン</span></a>
+                        </li>
+                        <br>
+                        <li class="nav-item">
+                            <a href="{% url 'signup' %}" class="nav-link active">サインアップ</span></a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <div class="matsu_fes container">
         <div class="col-10 col-md-6 text-center">
             {% block content %}

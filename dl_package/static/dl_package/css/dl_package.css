@@ -117,15 +117,18 @@
     text-align: center;
 }
 
-.header-image {
-    height: 100%;
-    object-fit: contain;
+.navbar-brand {
+    height: 60px;
+    width: auto;
 }
 
-.header-image-cover {
-  height: 100%; 
-  width: 100%; /* img-fluid が設定されていれば省略可能 */
-  object-fit: cover; 
+.navbar-brand img {
+    height: 100%;
+    width: auto;
+}
+
+.custom-navbar-color {
+    background-color: #7bba0a !important;
 }
 
 /* end of matsu_fes page's style */
