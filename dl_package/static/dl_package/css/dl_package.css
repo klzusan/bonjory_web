@@ -131,4 +131,40 @@
     background-color: #7bba0a !important;
 }
 
+/* 1. 動画を包含するコンテナの設定 */
+.video-wrap {
+    /* これがないと、動画がbodyの高さ全体を占めることが保証されない */
+    position: fixed; /* 画面全体に固定 */
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    overflow: hidden; /* 動画のサイズ調整で発生するはみ出しを隠す */
+    z-index: -100; /* ★★★ 最重要: 他の要素の下に配置する ★★★ */
+}
+
+/* 2. 背景動画要素の設定 */
+#bg-video {
+    /* 画面全体を覆い、アスペクト比を維持して中央に配置する */
+    width: 100vw; 
+    height: 100vh;
+    object-fit: cover; /* 画面全体を覆うように拡大・トリミング */
+    position: absolute; /* .video-wrapを基準に配置 */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 中央寄せ */
+    filter: brightness(1.0) contrast(0.3);
+}
+
+/* 3. コンテンツのコンテナの設定 */
+/* ナビゲーションやメインコンテンツが動画の上に表示されるようにする */
+body {
+    /* bodyに相対的な位置づけを明示的に指定しておくと安心 */
+    position: relative; 
+    z-index: 1; /* 動画より前面に表示させる */
+    /* 動画によって隠れて見えない要素がないよう、十分な高さを確保 */
+    min-height: 100vh;
+}
+
+
 /* end of matsu_fes page's style */
