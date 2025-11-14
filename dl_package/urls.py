@@ -13,4 +13,6 @@ urlpatterns = [
     path('download/', views.download_file, name="download_file"),
     path('upload/', views.zip_upload, name="zip_upload"),
     path('add_serial/', views.add_serial_number, name='add_serial_number'),
+    path('contact/', views.contact_view, name='contact'),
+    path('contact_thanks/', views.contact_thanks_view, name='contact_thanks'),
 ]

@@ -13,7 +13,7 @@
             <small>
                 <a href="{% url 'zip_upload' %}" class="top-menu">ゲームアップロード</a>
                 <p class="top-menu">(</p>
-                <p class="top-menu">Staff: {{ user.username }} </p>
+                <p class="top-menu">Staff: {{ user.email }} </p>
                 <form class="top-menu" id="logout-form" method="POST" action="{% url 'logout' %}">
                     {% csrf_token %}
                     <a href="#" id="logout-link">LOGOUT</a>
@@ -23,8 +23,9 @@
         {% elif user.is_authenticated %}
             <small>
                 <a href="{% url 'add_serial_number' %}" class="top-menu">シリアル番号登録 & ダウンロード</a>
+                <a href="{% url 'contact' %}" class="top-menu">お問い合わせ</a>
                 <p class="top-menu">(</p>
-                <p class="top-menu">LOGGED IN AS: {{ user.username }} </p>
+                <p class="top-menu">LOGGED IN AS: {{ user.email }} </p>
                 <form class="top-menu" id="logout-form" method="POST" action="{% url 'logout' %}">
                     {% csrf_token %}
                     <a href="#" id="logout-link">LOGOUT</a>

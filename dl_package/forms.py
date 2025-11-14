@@ -44,3 +44,27 @@ class serialNumberForm(forms.Form):
         if not serial.isdigit() or len(serial) != 8:
             raise forms.ValidationError('8桁の数字を入力してください')
         return serial
+    
+class ContactForm(forms.Form):
+    email = forms.EmailField(
+        label = '*メールアドレス',
+        widget = forms.EmailInput(attrs={'placeholder': 'email@example.com'})
+    )
+
+    name = forms.CharField(
+        label='お名前',
+        max_length=100,
+        widget=forms.TextInput(attrs={'placeholder': 'お名前'}),
+        required=False
+    )
+
+    subject = forms.CharField(
+        label = '*件名',
+        max_length=100,
+        widget=forms.TextInput(attrs={'placeholder': '件名'})
+    )
+
+    message = forms.CharField(
+        label='*お問い合わせ内容',
+        widget=forms.Textarea(attrs={'rows':5, 'placeholder': '具体的な内容をご記入ください'})
+    )

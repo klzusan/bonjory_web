@@ -6,8 +6,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 from django.conf import settings
 from django.http import FileResponse, Http404
-from .forms import SignUpForm, serialNumberForm
+from .forms import SignUpForm, serialNumberForm, ContactForm
 from django.urls import reverse
+from django.core.mail import send_mail
 import os
 
 # Create your views here.
@@ -147,3 +148,39 @@ def add_serial_number(request):
         form = serialNumberForm()
 
     return render(request, 'dl_package/add_serial_number.html', {'form': form})
+
+@login_required
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            name = form.cleaned_data['name']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+
+            if not name:
+                name = '匿名'
+
+            full_subject = f"[Handlimeお問い合わせ] {subject}"
+            full_message = f"送信元メールアドレス：{email}\n送信者名：{name}\n\n問い合わせ内容：\n{message}"
+
+            try:
+                send_mail(
+                    subject=full_subject,
+                    message=full_message,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=settings.MANAGERS_EMAIL,
+                    fail_silently=False,
+                )
+                return redirect('contact_thanks')
+            except Exception as e:
+                print(f"メール送信エラー: {e}")
+
+    else:
+        form = ContactForm()
+
+    return render(request, 'dl_package/contact.html', {'form': form})
+
+def contact_thanks_view(request):
+    return render(request, 'dl_package/contact_thanks.html')

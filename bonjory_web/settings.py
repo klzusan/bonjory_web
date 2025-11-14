@@ -135,3 +135,15 @@ MEDIA_ROOT = BASE_DIR / 'media'
 LOGIN_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'dl_package.CustomUser'
+
+MANAGERS_EMAIL = [
+    'ktr01kizu@gmail.com',
+]
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ktr01kizu@gmail.com'  # 送信元となるメールアドレス
+EMAIL_HOST_PASSWORD = 'dxdtmpdhuaijjgbm'        # アプリパスワードなど
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER # 送信元として表示されるメールアドレス
