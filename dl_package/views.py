@@ -191,7 +191,6 @@ def add_serial_number(request):
 
     return render(request, 'dl_package/add_serial_number.html', {'form': form})
 
-@login_required
 def contact_view(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
