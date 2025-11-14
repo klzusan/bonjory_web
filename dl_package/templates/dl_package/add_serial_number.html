@@ -2,20 +2,23 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-
-    {% if form.errors %}
-        <div class="red">
-            {{ form.errors }}
-        </div>
-    {% else %}
+    <div class="row">
         <h2>シリアル番号登録ページ</h2>
-    {% endif %}
+        <br><br><br><br>
+        {% if form.errors %}
+            <div class="red">
+                {{ form.errors }}
+            </div>
+        {% endif %}
+    </div>
 
-    {% bootstrap_messages %}
+    <div class="row">
+        {% bootstrap_messages %}
 
-    <form method="post">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% bootstrap_button "登録" button_type="submit" class="btn-primary" %}
-    </form>
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% bootstrap_button "登録" button_type="submit" class="btn-primary" %}
+        </form>
+    </div>
 {% endblock %}

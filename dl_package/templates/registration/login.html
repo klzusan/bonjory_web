@@ -2,15 +2,21 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-    <h2>ログイン</h2>
+    <div class="row">
+        <h2>ログイン</h2>
+    </div>
+    
+    <div class="row">
+        {% bootstrap_messages %}
 
-    {% bootstrap_messages %}
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% bootstrap_button "ログイン" button_type="submit" class="btn-primary" %}
+        </form>
+    </div>
 
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        {% bootstrap_button "ログイン" button_type="submit" class="btn-primary" %}
-    </form>
-
-    <p><br><br>アカウントがありませんか？<a href="{% url 'signup' %}">サインアップ</a></p>
+    <div class="row">
+        <p><br><br>アカウントがありませんか？<a href="{% url 'signup' %}">サインアップ</a></p>
+    </div>
 {% endblock %}

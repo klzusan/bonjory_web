@@ -5,10 +5,14 @@
     <title>Bonjory</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'dl_package/css/dl_package.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
     <div class="matsu-page-header">
+        <a href="/">
+            <img src="{% static 'dl_package/img/bonjory_logo.png' %}" alt="bonjory logo" class="img-fluid header-image-cover">
+        </a>
         {% if user.is_staff or user.is_superuser %}
             <small>
                 <a href="{% url 'zip_upload' %}" class="top-menu">ゲームアップロード</a>
@@ -16,7 +20,7 @@
                 <p class="top-menu">Staff: {{ user.email }} </p>
                 <form class="top-menu" id="logout-form" method="POST" action="{% url 'logout' %}">
                     {% csrf_token %}
-                    <a href="#" id="logout-link">LOGOUT</a>
+                    <a href="#" id="logout-link">ログアウト</a>
                 </form>
                 <p class="top-menu">)</p>
             </small>
@@ -25,10 +29,10 @@
                 <a href="{% url 'add_serial_number' %}" class="top-menu">シリアル番号登録 & ダウンロード</a>
                 <a href="{% url 'contact' %}" class="top-menu">お問い合わせ</a>
                 <p class="top-menu">(</p>
-                <p class="top-menu">LOGGED IN AS: {{ user.email }} </p>
+                <p class="top-menu">ログイン中: {{ user.email }} </p>
                 <form class="top-menu" id="logout-form" method="POST" action="{% url 'logout' %}">
                     {% csrf_token %}
-                    <a href="#" id="logout-link">LOGOUT</a>
+                    <a href="#" id="logout-link">ログアウト</a>
                 </form>
                 <p class="top-menu">)</p>
             </small>
@@ -40,11 +44,9 @@
         {% endif %}
     </div>
     <div class="matsu_fes container">
-        <div class="row">
-            <div class="col-md-12">
-                {% block content %}
-                {% endblock %}
-            </div>
+        <div class="col-10 col-md-6 text-center">
+            {% block content %}
+            {% endblock %}
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
