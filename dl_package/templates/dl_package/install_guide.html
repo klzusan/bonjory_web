@@ -11,6 +11,9 @@
                 <br><br><br>
             </div>
             <div class="row">
+                <h5 style="color: red;">ダウンロード</h5>
+            </div>
+            <div class="row">
                 <ol>
                     <li>
                         <p>ページ右上の「三」メニューを開き，「サインアップ」を押してアカウントを作成します．<br></p>
@@ -43,6 +46,72 @@
                     </li>
                 </ol>
             </div>
+            <br><br><br>
+            <div class="row">
+                <h5 style="color: red;">インストール</h5>
+            </div>
+            <div class="row">
+                <div class="d-flex justify-content-center">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="win-tab" data-bs-toggle="tab" data-bs-target="#win-tab-pane" type="button" role="tab" aria-controls="win-tab-pane" aria-selected="true">Windows</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="mac-tab" data-bs-toggle="tab" data-bs-target="#mac-tab-pane" type="button" role="tab" aria-controls="mac-tab-pane" aria-selected="false">Mac</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="win-tab-pane" role="tabpanel" aria-labelledby="win-tab" tabindex="0">
+                        <br>
+                        <ol>
+                            <li>
+                                <p>ダウンロードしたzip圧縮ファイルを解凍し，任意の場所に保存します．</p>
+                            </li>
+                            <br><br><br>
+                            <li>
+                                <p>フォルダ内の「Handlime.exe」をダブルクリックして起動します．</p>
+                                <img src="{% static 'dl_package/img/ins_win2.png' %}" class="mx-auto d-block" alt="win説明2" style="width: 100%; height: auto;">
+                            </li>
+                            <br><br><br>
+                            <li>
+                                <p>このような警告が出てきたら，「詳細情報」を押します．</p>
+                                <img src="{% static 'dl_package/img/ins_win3.png' %}" class="mx-auto d-block" alt="win説明3" style="width: 100%; height: auto;">
+                            </li>
+                            <br><br><br>
+                            <li>
+                                <p>「実行」を押します．</p>
+                                <img src="{% static 'dl_package/img/ins_win4.png' %}" class="mx-auto d-block" alt="win説明4" style="width: 100%; height: auto;">
+                            </li>
+                        </ol>
+                    </div>
+                    <div class="tab-pane fade" id="mac-tab-pane" role="tabpanel" aria-labelledby="mac-tab" tabindex="0">
+                        <br>
+                        <ol>
+                            <li>
+                                <p>ダウンロードしたzip圧縮ファイルを解凍し，任意の場所に保存します．</p>
+                            </li>
+                            <br><br><br>
+                            <li>
+                                <p>フォルダ内の「Handlime.exe」をダブルクリックして起動します．</p>
+                                <img src="{% static 'dl_package/img/ins_win2.png' %}" class="mx-auto d-block" alt="mac説明2" style="width: 100%; height: auto;">
+                            </li>
+                            <br><br><br>
+                            <li>
+                                <p>このような警告が出てきたら，「詳細情報」を押します．</p>
+                                <img src="{% static 'dl_package/img/ins_win3.png' %}" class="mx-auto d-block" alt="mac説明3" style="width: 100%; height: auto;">
+                            </li>
+                            <br><br><br>
+                            <li>
+                                <p>「実行」を押します．</p>
+                                <img src="{% static 'dl_package/img/ins_win4.png' %}" class="mx-auto d-block" alt="mac説明4" style="width: 100%; height: auto;">
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <br><br><br>
             <div class="row">
                 <p style="font-size: small;">ご不明な点は開発チームまでお問い合わせください．</p><br>
                 <a href="{% url 'contact' %}">お問い合わせフォーム</a>
