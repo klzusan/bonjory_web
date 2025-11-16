@@ -15,4 +15,5 @@ urlpatterns = [
     path('add_serial/', views.add_serial_number, name='add_serial_number'),
     path('contact/', views.contact_view, name='contact'),
     path('contact_thanks/', views.contact_thanks_view, name='contact_thanks'),
+    path('install_guide/', views.install_guide, name='install_guide'),
 ]

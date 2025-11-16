@@ -2,35 +2,39 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-    <div class="row">
-        <h2>登録済みシリアル番号</h2>
-    </div>
+    <div class="matsu_fes container">
+        <div class="col-10 col-md-6 text-center">
+            <div class="row">
+                <h2>登録済みシリアル番号</h2>
+            </div>
 
-    <div class="row">
-        <p>{{ serial }}</p>
-    </div>
-    
-    <div class="row">
-        <p>この番号は既に登録されています．</p>
-    </div>
-    
-    <br>
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <form method="get" action="{% url 'download_file' %}">
-                <button type="submit" name="file" value="win" class="btn btn-primary btn-lg">Windows版</button>
-            </form>
+            <div class="row">
+                <p>{{ serial }}</p>
+            </div>
+            
+            <div class="row">
+                <p>この番号は既に登録されています．</p>
+            </div>
+            
+            <br>
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <form method="get" action="{% url 'download_file' %}">
+                        <button type="submit" name="file" value="win" class="btn btn-primary btn-lg">Windows版</button>
+                    </form>
+                </div>
+                <div class="col-auto">
+                    <form method="get" action="{% url 'download_file' %}">
+                        <button type="submit" name="file" value="mac" class="btn btn-primary btn-lg">Mac版</button>
+                    </form>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+                <p style="font-size: small;">ご不明な点は開発チームまでお問い合わせください．</p><br>
+                <a href="{% url 'contact' %}">お問い合わせフォーム</a>
+            </div>
         </div>
-        <div class="col-auto">
-            <form method="get" action="{% url 'download_file' %}">
-                <button type="submit" name="file" value="mac" class="btn btn-primary btn-lg">Mac版</button>
-            </form>
-        </div>
-    </div>
-    <br>
-    <br>
-    <div class="row">
-        <p style="font-size: small;">ご不明な点は開発チームまでお問い合わせください．</p><br>
-        <a href="{% url 'contact' %}">お問い合わせフォーム</a>
     </div>
 {% endblock %}

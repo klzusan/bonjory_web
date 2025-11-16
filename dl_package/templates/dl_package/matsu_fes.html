@@ -3,21 +3,25 @@
 {% load static %}
 
 {% block content %}
-    <div class="row">
-        <img src="{% static 'dl_package/img/logo.png' %}" class="mx-auto d-block" alt="ロゴ">
-    </div>
-    <div class="row">
-        <h1 style="color:white;">その手で，世界を歩こう．</h1>
-        <p style="color:white;"><br>BONJORYが贈る，「手だけで遊べる」新感覚パズルアクションゲーム．</p>
-    </div>
-    <div class="row">
-        <p style="color:white;">シリアル番号の登録やゲームのダウンロードは<span style="color: orange; font-weight: bold;">11/17(月)の正午</span>に解禁されます！</p>
-    </div>
-    <div class="video-wrap">
-        <video autoplay muted loop id="bg-video">
-            <source src="{% static 'dl_package/mov/movie.mp4' %}" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
+    <div class="matsu_fes container">
+        <div class="col-10 col-md-6 text-center">
+            <div class="row">
+                <img src="{% static 'dl_package/img/logo.png' %}" class="mx-auto d-block" alt="ロゴ">
+            </div>
+            <div class="row">
+                <h1 style="color:white;">その手で，世界を歩こう．</h1>
+                <p style="color:white;"><br>BONJORYが贈る，「手だけで遊べる」新感覚パズルアクションゲーム．</p>
+            </div>
+            <div class="row">
+                <p style="color:white;">シリアル番号の登録やゲームのダウンロードは<span style="color: orange; font-weight: bold;">11/17(月)の正午</span>に解禁されます！</p>
+            </div>
+            <div class="video-wrap">
+                <video autoplay muted loop id="bg-video">
+                    <source src="{% static 'dl_package/mov/movie.mp4' %}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
     </div>
 {% endblock %}
 

@@ -1,0 +1,53 @@
+{% extends "dl_package/matsu_fes_base.html" %}
+{% load django_bootstrap5 %}
+
+{% load static %}
+
+{% block content %}
+    <div class="matsu_fes scroll_container">
+        <div class="col-10 col-md-6 text-center">
+            <div class="row">
+                <h2>インストールガイド</h2>
+                <br><br><br>
+            </div>
+            <div class="row">
+                <ol>
+                    <li>
+                        <p>ページ右上の「三」メニューを開き，「サインアップ」を押してアカウントを作成します．<br></p>
+                        <img src="{% static 'dl_package/img/install1.png' %}" class="mx-auto d-block" alt="説明1" style="width: 100%; height: auto;">
+                    </li>
+                    <br><br><br>
+                    <li>
+                        <p>問題がなければログインページに遷移するので，作ったアカウントでログインします．<br></p>
+                        <img src="{% static 'dl_package/img/install2.png' %}" class="mx-auto d-block" alt="説明2" style="width: 100%; height: auto;">
+                    </li>
+                    <br><br><br>
+                    <li>
+                        <p>ホーム画面に遷移するので，ページ右上の「三」メニューを開き，「シリアル番号登録 & ゲームダウンロード」を押します．<br></p>
+                        <img src="{% static 'dl_package/img/install3.png' %}" class="mx-auto d-block" alt="説明3" style="width: 100%; height: auto;">
+                    </li>
+                    <br><br><br>
+                    <li>
+                        <p>購入したシリアル番号を入力して登録します．<br></p>
+                        <img src="{% static 'dl_package/img/install4.png' %}" class="mx-auto d-block" alt="説明4" style="width: 100%; height: auto;">
+                    </li>
+                    <br><br><br>
+                    <li>
+                        <p>問題がなければホーム画面に遷移するので，もう一度「シリアル番号登録 & ゲームダウンロード」を押します．<br></p>
+                        <img src="{% static 'dl_package/img/install3.png' %}" class="mx-auto d-block" alt="説明5" style="width: 100%; height: auto;">
+                    </li>
+                    <br><br><br>
+                    <li>
+                        <p>お使いのプラットフォーム用のボタンを押して，ゲームをダウンロードしてください．<br></p>
+                        <img src="{% static 'dl_package/img/install6.png' %}" class="mx-auto d-block" alt="説明6" style="width: 100%; height: auto;">
+                    </li>
+                </ol>
+            </div>
+            <div class="row">
+                <p style="font-size: small;">ご不明な点は開発チームまでお問い合わせください．</p><br>
+                <a href="{% url 'contact' %}">お問い合わせフォーム</a>
+                <br><br><br><br><br><br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

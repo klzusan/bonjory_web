@@ -254,3 +254,6 @@ def check_serial_download_permission(request):
         return serial_obj
     else:
         return None
+    
+def install_guide(request):
+    return render(request, 'dl_package/install_guide.html')
